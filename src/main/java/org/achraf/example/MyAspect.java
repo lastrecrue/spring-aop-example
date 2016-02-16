@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class MyAspect implements Advice {
 	static Logger log = Logger.getLogger(MyAspect.class);
 
-	@Before("execution(* org.achraf.example.*.*(..))")
+	@Before("execution(* org.achraf.example.page.*.*(..))")
 	public void beforeAdvice() {
 		log.debug("beforeAdvice");
 	}
