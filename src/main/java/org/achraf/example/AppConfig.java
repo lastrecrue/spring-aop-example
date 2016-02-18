@@ -1,9 +1,7 @@
 package org.achraf.example;
 
-import java.io.File;
-
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -16,10 +14,7 @@ public class AppConfig {
 
 	@Bean
 	public WebDriver webDriver() {
-
-		File file = new File("C:/Dev/svn/SIGV/trunk/sigv/sigv-test-auto/selenium_standalone/windows/internetexplorer/64bit/IEDriverServer.exe");
-		System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
-		return new InternetExplorerDriver();
+		return new FirefoxDriver();
 	}
 
 }

@@ -2,7 +2,8 @@ package org.achraf.example.page;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.achraf.example.PageObject;
+import java.lang.reflect.InvocationTargetException;
+
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.AjaxElement;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -11,11 +12,8 @@ import org.openqa.selenium.support.FindBy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@PageObject
+@Component
 public class BingPage extends FluentPage {
-
-	@Autowired
-	private WebDriver webDriver;
 
 	@FindBy(id = "sb_form_go")
 	@AjaxElement(timeOutInSeconds = 10)
@@ -25,11 +23,29 @@ public class BingPage extends FluentPage {
 	@AjaxElement(timeOutInSeconds = 10)
 	private FluentWebElement form;
 
+	@Autowired
+	public BingPage(WebDriver webDriver) {
+		super(webDriver);
+		createPage(this.getClass());
+	}
+
+	/**
+	 * to delegat instantiation to spring only
+	 */
+	@SuppressWarnings("unchecked")
+	protected <T extends FluentPage> T constructPageWithParams(Class<T> cls,
+			Object[] params) throws NoSuchMethodException,
+			InstantiationException, IllegalAccessException,
+			InvocationTargetException {
+		return (T) this;
+	}
+
 	public void title_of_bing_should_contain_search_query_name() {
-		webDriver.get("http://www.bing.com");
+
+		getDriver().get("http://www.bing.com");
 		form.text("FluentLenium");
 		submit.submit();
-		assertThat(webDriver.getTitle()).contains("FluentLenium");
+		assertThat(getDriver().getTitle()).contains("FluentLenium");
 	}
 
 }
