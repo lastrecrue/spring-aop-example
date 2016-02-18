@@ -1,8 +1,7 @@
-package org.achraf.example.page;
+package org.achraf.example;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.achraf.example.PageObject;
 import org.fluentlenium.core.FluentPage;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 @PageObject
 public class BingPage extends FluentPage {
 	@Autowired
-	private WebDriver driver;
+	public BingPage(WebDriver webDriver) {
+		super(webDriver);
+	}
 
 	public void title_of_bing_should_contain_search_query_name() {
 
