@@ -1,5 +1,6 @@
 package org.achraf.example;
 
+import org.achraf.example.page.BingPage;
 import org.apache.log4j.Logger;
 import org.fluentlenium.adapter.FluentTest;
 import org.junit.Test;

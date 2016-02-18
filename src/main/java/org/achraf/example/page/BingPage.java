@@ -1,12 +1,13 @@
-package org.achraf.example;
+package org.achraf.example.page;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.fluentlenium.core.FluentPage;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-@PageObject
+@Component
 public class BingPage extends FluentPage {
 	@Autowired
 	public BingPage(WebDriver webDriver) {
