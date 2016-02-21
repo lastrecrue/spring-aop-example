@@ -3,18 +3,15 @@ package org.achraf.example;
 import org.achraf.example.page.BingPage;
 import org.apache.log4j.Logger;
 import org.fluentlenium.adapter.FluentTest;
-import org.fluentlenium.core.annotation.Page;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { AppConfig.class })
-// @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class })
 public class MyTest extends FluentTest {
 	static Logger log = Logger.getLogger(MyAspect.class);
 

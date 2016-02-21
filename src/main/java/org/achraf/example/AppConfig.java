@@ -12,7 +12,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @ComponentScan
 public class AppConfig {
 
-	@Bean
+	@Bean(destroyMethod = "quit")
 	public WebDriver webDriver() {
 		return new FirefoxDriver();
 	}
