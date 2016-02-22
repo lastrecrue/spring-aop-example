@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class BingPage extends AbstractSpringFluentPage {
+	private static final String url = "http://www.bing.com";
+
 	@Autowired
 	public BingPage(WebDriver webDriver) {
 		super(webDriver);
@@ -24,9 +26,13 @@ public class BingPage extends AbstractSpringFluentPage {
 	@AjaxElement(timeOutInSeconds = 10)
 	private FluentWebElement form;
 
-	public void title_of_bing_should_contain_search_query_name() {
+	public String getUrl() {
+		return url;
+	}
 
-		getDriver().get("http://www.bing.com");
+	public void title_of_bing_should_contain_search_query_name() {
+		go();
+		getDriver().get(url);
 		form.text("FluentLenium");
 		submit.submit();
 		assertThat(getDriver().getTitle()).contains("FluentLenium");

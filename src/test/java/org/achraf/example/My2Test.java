@@ -5,8 +5,8 @@ import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class MyTest extends AbstractTest {
-	static Logger log = Logger.getLogger(MyTest.class);
+public class My2Test extends AbstractTest {
+	static Logger log = Logger.getLogger(My2Test.class);
 
 	@Autowired
 	private BingPage bingPage;
