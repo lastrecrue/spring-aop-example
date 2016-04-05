@@ -4,27 +4,31 @@
 	<groupId>org.achraf</groupId>
 	<artifactId>spring-aop-achraf</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<properties>
+		<robotframework.version>2.9.2</robotframework.version>
+		<keywords.class>MyLibrary</keywords.class>
+	</properties>
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-aop</artifactId>
-			<version>4.2.4.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>4.2.4.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>4.2.4.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>cglib</groupId>
-			<artifactId>cglib</artifactId>
-			<version>3.2.0</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework</groupId> -->
+<!-- 			<artifactId>spring-aop</artifactId> -->
+<!-- 			<version>4.2.4.RELEASE</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework</groupId> -->
+<!-- 			<artifactId>spring-context</artifactId> -->
+<!-- 			<version>4.2.4.RELEASE</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework</groupId> -->
+<!-- 			<artifactId>spring-test</artifactId> -->
+<!-- 			<version>4.2.4.RELEASE</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>cglib</groupId> -->
+<!-- 			<artifactId>cglib</artifactId> -->
+<!-- 			<version>3.2.0</version> -->
+<!-- 		</dependency> -->
 		<dependency>
 			<groupId>org.fluentlenium</groupId>
 			<artifactId>fluentlenium-core</artifactId>
@@ -54,23 +58,94 @@
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 		</dependency>
+
+
+		<dependency>
+			<groupId>org.robotframework</groupId>
+			<artifactId>javalib-core</artifactId>
+			<version>1.2.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.robotframework</groupId>
+			<artifactId>robotframework</artifactId>
+			<version>${robotframework.version}</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
 		<plugins>
+			<!-- <plugin> -->
+			<!-- <groupId>org.apache.maven.plugins</groupId> -->
+			<!-- <artifactId>maven-failsafe-plugin</artifactId> -->
+			<!-- <version>2.19.1</version> -->
+			<!-- <executions> -->
+			<!-- <execution> -->
+			<!-- <goals> -->
+			<!-- <goal>integration-test</goal> -->
+			<!-- <goal>verify</goal> -->
+			<!-- </goals> -->
+			<!-- </execution> -->
+			<!-- </executions> -->
+			<!-- </plugin> -->
+
+
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>2.19.1</version>
+				<!-- Integration-Test, build documentation -->
+				<groupId>org.robotframework</groupId>
+				<artifactId>robotframework-maven-plugin</artifactId>
+				<version>1.4.5</version>
 				<executions>
 					<execution>
+						<id>test</id>
+						<phase>integration-test</phase>
 						<goals>
-							<goal>integration-test</goal>
-							<goal>verify</goal>
+							<goal>run</goal>
 						</goals>
+						<configuration>
+							<logLevel>debug</logLevel>
+							<testCasesDirectory>${project.basedir}/src/test/robotframework/testsuites</testCasesDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>html</id>
+						<phase>package</phase>
+						<goals>
+							<goal>libdoc</goal>
+						</goals>
+						<configuration>
+							<libdoc>
+								<outputDirectory>${project.build.directory}</outputDirectory>
+								<outputFile>${keywords.class}.html</outputFile>
+								<libraryOrResourceFile>${keywords.class}</libraryOrResourceFile>
+							</libdoc>
+						</configuration>
+					</execution>
+					<execution>
+						<id>xml</id>
+						<phase>package</phase>
+						<goals>
+							<goal>libdoc</goal>
+						</goals>
+						<configuration>
+							<libdoc>
+								<outputDirectory>${project.build.directory}</outputDirectory>
+								<outputFile>${keywords.class}.xml</outputFile>
+								<libraryOrResourceFile>${keywords.class}</libraryOrResourceFile>
+							</libdoc>
+						</configuration>
 					</execution>
 				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.robotframework</groupId>
+						<artifactId>robotframework</artifactId>
+						<version>${robotframework.version}</version>
+					</dependency>
+				</dependencies>
 			</plugin>
+
 		</plugins>
 	</build>
 </project>

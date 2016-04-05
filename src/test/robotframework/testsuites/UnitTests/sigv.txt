@@ -1,0 +1,18 @@
+*** Settings ***
+Suite Setup       Open Page
+Suite Teardown    Close All Browsers
+Library           MyLibrary
+
+*** Variables ***
+${URL Application}     http:/10.195.183.190:2080/sigv/sigv.html
+
+*** Keywords ***
+Open Page
+	title of bing should contain search query name
+    Open Browser    ${URL Application}
+    Input Text    elementByName=j_username    00000003
+    Click Button  submit
+    
+*** Test Cases ***
+Login user 
+    le Clt Initialise La Commande

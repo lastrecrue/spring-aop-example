@@ -2,21 +2,18 @@ package org.achraf.example.page;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.AjaxElement;
 import org.fluentlenium.core.domain.FluentWebElement;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.robotframework.javalib.annotation.RobotKeywordOverload;
+import org.robotframework.javalib.annotation.RobotKeywords;
 
-@Component
-public class BingPage extends AbstractSpringFluentPage {
+@RobotKeywords
+public class BingPage extends FluentPage {
 	private static final String url = "http://www.bing.com";
 
-	@Autowired
-	public BingPage(WebDriver webDriver) {
-		super(webDriver);
-	}
+	
 
 	@FindBy(id = "sb_form_go")
 	@AjaxElement(timeOutInSeconds = 10)
@@ -29,7 +26,7 @@ public class BingPage extends AbstractSpringFluentPage {
 	public String getUrl() {
 		return url;
 	}
-
+	@RobotKeywordOverload
 	public void title_of_bing_should_contain_search_query_name() {
 		go();
 		getDriver().get(url);
